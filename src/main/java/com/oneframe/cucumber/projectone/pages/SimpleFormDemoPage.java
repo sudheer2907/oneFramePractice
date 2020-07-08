@@ -37,6 +37,23 @@ public class SimpleFormDemoPage {
     @FindBy(xpath = "//ul[@class='dropdown-menu']//a[contains(text(),'JQuery Select dropdown')]")
     private WebElement subTabJQuerySelectDropdown;
 
+    @FindBy(xpath = "//a[@class='at-cv-button at-cv-lightbox-yesno at-cm-no-button']")
+    private WebElement acceptAnAlert;
+
+    @FindBy(xpath = "//input[@id='user-message']")
+    private WebElement txtBoxEnterMessage;
+
+    @FindBy(xpath = "//button[contains(text(),'Show Message')]")
+    private WebElement buttonShowMessage;
+
+    @FindBy(xpath = "//label[contains(text(),'Your Message:')]/following-sibling::span")
+    private WebElement labelGetShowMessageOutput;
+
+    public void acceptAnAlert() {
+        WebDriverFactory.waitForAnElementToBeVisible(acceptAnAlert, 10);
+        WebDriverFactory.clickWebElement(acceptAnAlert);
+    }
+
     public void clickonTab(String tabString) {
         WebDriverFactory.clickWebElement(tabInputForms);
     }
@@ -74,5 +91,35 @@ public class SimpleFormDemoPage {
         default:
             Assert.fail("Wrong Sub tab name is provided.");
         }
+    }
+
+    /**
+     * Enter any text into Enter message textbox.
+     *
+     * @param arg
+     *            - text to be entered into message textbox.
+     * @author sudheer.singh
+     */
+    public void enterTextIntoMessageBox(String arg) {
+        WebDriverFactory.sendKeys(txtBoxEnterMessage, arg);
+    }
+
+    /**
+     * Click show message button.
+     *
+     * @author sudheer.singh
+     */
+    public void clickShowMessageButton() {
+        WebDriverFactory.clickWebElement(buttonShowMessage);
+    }
+
+    /**
+     * Get text message entered into the enter message text box.
+     *
+     * @author sudheer.singh
+     */
+    public String getTextShowMessage() {
+        WebDriverFactory.waitForAnElementToBeVisible(labelGetShowMessageOutput, 4);
+        return labelGetShowMessageOutput.getText();
     }
 }

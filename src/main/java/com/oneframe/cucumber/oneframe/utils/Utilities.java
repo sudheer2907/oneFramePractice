@@ -7,7 +7,7 @@ public class Utilities {
     private static ResourceBundle rb2;
 
     static {
-        rb1 = ResourceBundle.getBundle("config");
+        rb1 = ResourceBundle.getBundle("properties/config");
     }
 
     /**
@@ -34,7 +34,7 @@ public class Utilities {
         if (rb2 == null) {
             String environmentStr = getConfigProperties("Environment");
             LogPrinter.printLog("Execution Environment: " + environmentStr);
-            rb2 = ResourceBundle.getBundle(environmentStr + "config");
+            rb2 = ResourceBundle.getBundle("properties/" + environmentStr + "config");
         }
         return rb2.getString(keyString);
     }

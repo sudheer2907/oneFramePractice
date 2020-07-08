@@ -7,8 +7,8 @@ import org.testng.annotations.BeforeClass;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 
-import com.oneframe.cucumber.oneframeutils.WebDriverFactory;
-import com.oneframe.cucumber.oneframeutils.reporting.GenerateReport;
+import com.oneframe.cucumber.oneframe.reporting.GenerateReport;
+import com.oneframe.cucumber.oneframe.utils.WebDriverFactory;
 
 import cucumber.api.CucumberOptions;
 import cucumber.api.junit.Cucumber;

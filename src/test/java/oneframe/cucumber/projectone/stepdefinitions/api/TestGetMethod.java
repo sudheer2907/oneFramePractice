@@ -3,7 +3,7 @@ package oneframe.cucumber.projectone.stepdefinitions.api;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import com.oneframe.cucumber.oneframeutils.LogPrinter;
+import com.oneframe.cucumber.oneframe.utils.LogPrinter;
 import com.oneframe.cucumber.projectone.beans.ResponseBean;
 import com.oneframe.cucumber.projectone.webservicehelper.GetHelper;
 
