@@ -13,9 +13,6 @@ public class SimpleFormDemoPage {
         PageFactory.initElements(WebDriverFactory.getDriver(), this);
     }
 
-    @FindBy(xpath = "//a[@class='dropdown-toggle'][contains(text(),'Input Forms')]")
-    private WebElement tabInputForms;
-
     @FindBy(xpath = "//ul[@class='dropdown-menu']//a[contains(text(),'Simple Form Demo')]")
     private WebElement subTabSimpleFormDemo;
 
@@ -50,12 +47,8 @@ public class SimpleFormDemoPage {
     private WebElement labelGetShowMessageOutput;
 
     public void acceptAnAlert() {
-        WebDriverFactory.waitForAnElementToBeVisible(acceptAnAlert, 10);
+        WebDriverFactory.waitForAnElementToBeVisible(acceptAnAlert, 20);
         WebDriverFactory.clickWebElement(acceptAnAlert);
-    }
-
-    public void clickonTab(String tabString) {
-        WebDriverFactory.clickWebElement(tabInputForms);
     }
 
     /**

@@ -28,15 +28,15 @@ public abstract class WebDriverFactory {
      *
      * @author sudheer.singh
      */
-    public static void launchApplication() {
+    public static void openApplication() {
         String bwoserNameString = Utilities.getEnvironmentProperties("browser");
         path = System.getProperty("user.dir");
-        switch (bwoserNameString) {
-        case "chrome":
+        switch (bwoserNameString.toUpperCase()) {
+        case "CHROME":
             System.setProperty("webdriver.chrome.driver", path + "/drivers/chromedriver.exe");
             setDriver(new ChromeDriver());
             break;
-        case "firefox":
+        case "FIREFOX":
             setDriver(new FirefoxDriver());
             break;
         default:
@@ -86,6 +86,7 @@ public abstract class WebDriverFactory {
      * Close window.
      */
     public static void closeWindow() {
+        getDriver().close();
         getDriver().quit();
     }
 

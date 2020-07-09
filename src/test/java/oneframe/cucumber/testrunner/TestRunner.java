@@ -8,6 +8,8 @@ import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 
 import com.oneframe.cucumber.oneframe.reporting.GenerateReport;
+import com.oneframe.cucumber.oneframe.utils.LogPrinter;
+import com.oneframe.cucumber.oneframe.utils.TimeDurationCalculator;
 import com.oneframe.cucumber.oneframe.utils.WebDriverFactory;
 
 import cucumber.api.CucumberOptions;
@@ -23,6 +25,7 @@ import cucumber.api.testng.TestNGCucumberRunner;
 public class TestRunner {
     private TestNGCucumberRunner testNGCucumberRunner;
     private static String scenarioName = null;
+    private TimeDurationCalculator timeDurationCalculator = new TimeDurationCalculator();
 
     /**
      * setUpClass.
@@ -33,12 +36,13 @@ public class TestRunner {
         PropertyConfigurator.configure("log4j.properties");
         System.setProperty("log4j.configurationFile", "log4j.properties");
         testNGCucumberRunner = new TestNGCucumberRunner(this.getClass());
+        timeDurationCalculator.start();
     }
 
     @Test(groups = "cucumber", description = "Runs Cucumber Feature", dataProvider = "features")
     public void feature(CucumberFeatureWrapper cucumberFeature) {
         scenarioName = cucumberFeature.getCucumberFeature().getPath();
-        System.out.println("**************Executing scenario *********" + scenarioName);
+        System.out.println("************** Executing scenario *********" + scenarioName);
         testNGCucumberRunner.runCucumber(cucumberFeature.getCucumberFeature());
 
     }
@@ -53,8 +57,12 @@ public class TestRunner {
      */
     @AfterClass(alwaysRun = true)
     public void tearDownClass() {
+        timeDurationCalculator.stop();
+        timeDurationCalculator.calculate();
+        LogPrinter.printLog("Execution Took : " + timeDurationCalculator.getTimeElapsed());
         testNGCucumberRunner.finish();
         WebDriverFactory.getDriver().close();
+        WebDriverFactory.getDriver().quit();
         GenerateReport.generateReport("oneFrame", "target/test-report");
     }
 

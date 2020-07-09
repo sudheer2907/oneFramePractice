@@ -11,9 +11,9 @@ public class TestLogin {
 
     @Given("^I launch and login to the application$")
     public void i_launch_and_login_to_the_application() {
-        WebDriverFactory.launchApplication();
-        WebDriverFactory.waitForPageToLoad(10);
+        WebDriverFactory.openApplication();
         simpleFormDemoPage = new SimpleFormDemoPage();
         simpleFormDemoPage.acceptAnAlert();
+        WebDriverFactory.waitForPageToLoad(30);
     }
 }

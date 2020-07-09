@@ -14,9 +14,11 @@
 		<jdk.level>1.8</jdk.level>
 		<checksyle.rule.file>code-compliances/checkstyle-rules.xml</checksyle.rule.file>
 		<checkstyle.failure>true</checkstyle.failure>
-		<cpd.skip>true</cpd.skip>
 		<run.ui.tests>false</run.ui.tests>
-		<browser.ui.tests>Chrome</browser.ui.tests>
+		<cpd.skip>false</cpd.skip>
+        <checkstyle.check.skip>false</checkstyle.check.skip>
+        <pmd.check.skip>false</pmd.check.skip>
+        <findbugs.check.skip>false</findbugs.check.skip>
 	</properties>
 	<dependencies>
 		<dependency>

@@ -1,5 +1,7 @@
 package oneframe.cucumber.projectone.stepdefinitions.ui;
 
+import com.oneframe.cucumber.projectone.pages.HomePage;
+import com.oneframe.cucumber.projectone.pages.ProgressBars;
 import com.oneframe.cucumber.projectone.pages.SimpleFormDemoPage;
 
 import cucumber.api.java.en.And;
@@ -9,15 +11,24 @@ import cucumber.api.java.en.When;
 public class TestSimpleFormDemo {
 
     SimpleFormDemoPage simpleFormDemoPage = new SimpleFormDemoPage();
+    HomePage homePage = new HomePage();
+    ProgressBars progressBars = new ProgressBars();
 
     @And("^I click on tab (.*)$")
     public void i_click_on_tab(String tabNameString) {
-        simpleFormDemoPage.clickonTab(tabNameString);
+        homePage.clickonTab(tabNameString);
     }
 
-    @And("^I click on sub tab (.*)$")
-    public void i_click_on_sub_tab(String subTabNameString) {
-        simpleFormDemoPage.clickOnSubtab(subTabNameString);
+    @And("^I click on sub tab (.*) of (.*) page$")
+    public void i_click_on_sub_tab(String subTabNameString, String pageName) {
+        switch (pageName) {
+        case "Input Forms":
+            simpleFormDemoPage.clickOnSubtab(subTabNameString);
+            break;
+        case "Progress Bars":
+            progressBars.clickOnSubtab(subTabNameString);
+            break;
+        }
     }
 
     @When("^I enter text message as (.*) into enter message textbox$")
