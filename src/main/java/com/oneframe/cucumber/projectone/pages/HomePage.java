@@ -16,7 +16,7 @@ public class HomePage {
     @FindBy(xpath = "//a[@class='dropdown-toggle'][contains(text(),'Input Forms')]")
     private WebElement tabInputForms;
 
-    @FindBy(xpath = "//a[@class='dropdown-toggle'][contains(text(),'Input Forms')]")
+    @FindBy(xpath = "//a[@class='dropdown-toggle'][contains(text(),'Progress Bars')]")
     private WebElement tabProgressBars;
 
     /**
@@ -27,6 +27,7 @@ public class HomePage {
      * @author sudheer.singh
      */
     public void clickonTab(String tabString) {
+        System.out.println("tabString is " + tabString);
         switch (tabString) {
         case "Input Forms":
             WebDriverFactory.clickWebElement(tabInputForms);

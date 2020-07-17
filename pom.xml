@@ -354,7 +354,7 @@
 				<configuration>
 					<xmlOutput>true</xmlOutput>
 					<xmlOutputDirectory>target/site</xmlOutputDirectory>
-					<failOnError>true</failOnError>
+					<failOnError>false</failOnError>
 				</configuration>
 				<executions>
 					<execution>

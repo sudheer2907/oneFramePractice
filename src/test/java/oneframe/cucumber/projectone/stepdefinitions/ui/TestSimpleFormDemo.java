@@ -16,6 +16,7 @@ public class TestSimpleFormDemo {
 
     @And("^I click on tab (.*)$")
     public void i_click_on_tab(String tabNameString) {
+        System.out.println("tabNameString is " + tabNameString);
         homePage.clickonTab(tabNameString);
     }
 

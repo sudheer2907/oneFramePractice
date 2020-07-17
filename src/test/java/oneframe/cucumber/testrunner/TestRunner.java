@@ -10,7 +10,6 @@ import org.testng.annotations.Test;
 import com.oneframe.cucumber.oneframe.reporting.GenerateReport;
 import com.oneframe.cucumber.oneframe.utils.LogPrinter;
 import com.oneframe.cucumber.oneframe.utils.TimeDurationCalculator;
-import com.oneframe.cucumber.oneframe.utils.WebDriverFactory;
 
 import cucumber.api.CucumberOptions;
 import cucumber.api.junit.Cucumber;
@@ -61,8 +60,8 @@ public class TestRunner {
         timeDurationCalculator.calculate();
         LogPrinter.printLog("Execution Took : " + timeDurationCalculator.getTimeElapsed());
         testNGCucumberRunner.finish();
-        WebDriverFactory.getDriver().close();
-        WebDriverFactory.getDriver().quit();
+        // WebDriverFactory.getDriver().close();
+        // WebDriverFactory.getDriver().quit();
         GenerateReport.generateReport("oneFrame", "target/test-report");
     }
 

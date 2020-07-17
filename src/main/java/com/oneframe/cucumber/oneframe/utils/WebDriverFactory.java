@@ -9,9 +9,11 @@ import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.OutputType;
 import org.openqa.selenium.TakesScreenshot;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebDriverException;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
+import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.ExpectedCondition;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
@@ -86,8 +88,11 @@ public abstract class WebDriverFactory {
      * Close window.
      */
     public static void closeWindow() {
-        getDriver().close();
-        getDriver().quit();
+        if (driver != null) {
+            getDriver().close();
+            getDriver().quit();
+            WebDriverFactory.driver = null;
+        }
     }
 
     /**
@@ -200,5 +205,74 @@ public abstract class WebDriverFactory {
     public static void waitForAnElementToBeVisible(WebElement element, int timeOut) {
         WebDriverWait wait = new WebDriverWait(driver, timeOut);
         wait.until(ExpectedConditions.visibilityOf(element));
+    }
+
+    /**
+     * Refresh current page.
+     */
+    public static void refresh() {
+        driver.navigate().refresh();
+    }
+
+    /**
+     * Mouse hover over an element.
+     *
+     * @param element
+     *            - web element.
+     * @author sudheer.singh
+     */
+    public static void mouseHoverOnElement(WebElement element) {
+        Actions actions = new Actions(driver);
+        actions.moveToElement(element).build().perform();
+    }
+
+    /**
+     * Wait for Element to be visible on Screen before performing any action and
+     * Ignoring any Selenium Exception.
+     *
+     * @param elementLocator
+     *            - web element.
+     * @param timeout
+     *            - timeout period.
+     * @param klass
+     *            - class
+     */
+    public static void waitForElementForVisibilityIgnoringException(WebElement elementLocator, int timeout,
+            Class<? extends WebDriverException> klass) {
+        WebDriverWait wait = new WebDriverWait(driver, timeout);
+        wait.ignoring(klass).until(ExpectedConditions.visibilityOf(elementLocator));
+    }
+
+    /**
+     * Switch to child or parent window.
+     *
+     * @param windowHandle
+     *            - window to be switche into.
+     * @author sudheer.singh
+     */
+    public static void switchToWindow(String windowHandle) {
+        if (windowHandle == null) {
+            LogPrinter.printLog("No second window in the browser is present");
+            return;
+        }
+        driver.switchTo().window(windowHandle);
+    }
+
+    /**
+     * Switch into frame.
+     *
+     * @param elementLocator
+     *            - web element.
+     * @author sudheer.singh
+     */
+    public static void switchToFrameInDom(WebElement elementLocator) {
+        driver.switchTo().frame(elementLocator);
+    }
+
+    /**
+     * Close then current open window.
+     */
+    public static void closeCurrentBrowserWindow() {
+        driver.close();
     }
 }
