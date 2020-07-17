@@ -1,4 +1,4 @@
-package com.oneframe.cucumber.oneframe.utils;
+package com.oneframe.cucumber.oneframebase.utils;
 
 public enum HttpStatus {
     CONTINUE(100, "Continue"), SWITCHING_PROTOCOL(101, "Switching Protocols"), PROCESSING(102, "Processing"),

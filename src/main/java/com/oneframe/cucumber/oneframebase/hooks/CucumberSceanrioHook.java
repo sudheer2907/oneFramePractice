@@ -1,9 +1,9 @@
-package com.oneframe.cucumber.oneframe.hooks;
+package com.oneframe.cucumber.oneframebase.hooks;
 
 import java.io.IOException;
 
-import com.oneframe.cucumber.oneframe.utils.LogPrinter;
-import com.oneframe.cucumber.oneframe.utils.WebDriverFactory;
+import com.oneframe.cucumber.oneframebase.utils.LogPrinter;
+import com.oneframe.cucumber.oneframebase.utils.WebDriverFactory;
 
 import cucumber.api.Scenario;
 import cucumber.api.java.After;

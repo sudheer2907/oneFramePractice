@@ -1,4 +1,4 @@
-package com.oneframe.cucumber.oneframe.utils;
+package com.oneframe.cucumber.oneframebase.utils.timeutils;
 
 import org.joda.time.DateTime;
 import org.joda.time.Seconds;

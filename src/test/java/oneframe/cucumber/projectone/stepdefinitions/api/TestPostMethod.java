@@ -5,9 +5,9 @@ import java.io.IOException;
 import org.json.JSONException;
 import org.junit.Assert;
 
-import com.oneframe.cucumber.oneframe.utils.LogPrinter;
+import com.oneframe.cucumber.oneframebase.constants.JSONConstants;
+import com.oneframe.cucumber.oneframebase.utils.LogPrinter;
 import com.oneframe.cucumber.projectone.beans.ResponseBean;
-import com.oneframe.cucumber.projectone.constants.JSONConstants;
 import com.oneframe.cucumber.projectone.webservicehelper.PostHelper;
 
 import cucumber.api.java.en.Given;

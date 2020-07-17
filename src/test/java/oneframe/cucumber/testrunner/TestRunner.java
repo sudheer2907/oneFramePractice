@@ -7,9 +7,9 @@ import org.testng.annotations.BeforeClass;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 
-import com.oneframe.cucumber.oneframe.reporting.GenerateReport;
-import com.oneframe.cucumber.oneframe.utils.LogPrinter;
-import com.oneframe.cucumber.oneframe.utils.TimeDurationCalculator;
+import com.oneframe.cucumber.oneframebase.reporting.GenerateReport;
+import com.oneframe.cucumber.oneframebase.utils.LogPrinter;
+import com.oneframe.cucumber.oneframebase.utils.timeutils.TimeDurationCalculator;
 
 import cucumber.api.CucumberOptions;
 import cucumber.api.junit.Cucumber;

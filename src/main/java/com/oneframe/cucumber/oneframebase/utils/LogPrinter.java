@@ -1,4 +1,4 @@
-package com.oneframe.cucumber.oneframe.utils;
+package com.oneframe.cucumber.oneframebase.utils;
 
 import org.apache.log4j.xml.DOMConfigurator;
 import org.slf4j.Logger;

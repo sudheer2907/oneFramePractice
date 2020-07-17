@@ -1,4 +1,4 @@
-package com.oneframe.cucumber.oneframe.exception;
+package com.oneframe.cucumber.oneframebase.exception;
 
 /**
  * The FieldNotFoundException wraps all checked standard Java exception and

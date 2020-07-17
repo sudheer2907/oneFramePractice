@@ -1,4 +1,4 @@
-package com.oneframe.cucumber.oneframe.utils;
+package com.oneframe.cucumber.oneframebase.utils;
 
 import java.util.ResourceBundle;
 

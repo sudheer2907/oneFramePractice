@@ -5,9 +5,9 @@ import static io.restassured.RestAssured.given;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import com.oneframe.cucumber.oneframe.utils.Utilities;
+import com.oneframe.cucumber.oneframebase.constants.JSONConstants;
+import com.oneframe.cucumber.oneframebase.utils.Utilities;
 import com.oneframe.cucumber.projectone.beans.ResponseBean;
-import com.oneframe.cucumber.projectone.constants.JSONConstants;
 
 import io.restassured.response.Response;
 

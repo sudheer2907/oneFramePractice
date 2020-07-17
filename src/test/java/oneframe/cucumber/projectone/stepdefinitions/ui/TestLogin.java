@@ -1,6 +1,6 @@
 package oneframe.cucumber.projectone.stepdefinitions.ui;
 
-import com.oneframe.cucumber.oneframe.utils.WebDriverFactory;
+import com.oneframe.cucumber.oneframebase.utils.WebDriverFactory;
 import com.oneframe.cucumber.projectone.pages.SimpleFormDemoPage;
 
 import cucumber.api.java.en.Given;

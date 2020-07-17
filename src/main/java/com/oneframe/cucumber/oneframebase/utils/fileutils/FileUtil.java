@@ -1,4 +1,4 @@
-package com.oneframe.cucumber.oneframe.utils;
+package com.oneframe.cucumber.oneframebase.utils.fileutils;
 
 import java.io.File;
 import java.io.IOException;
@@ -16,6 +16,8 @@ import org.json.JSONException;
 import org.json.JSONObject;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+
+import com.oneframe.cucumber.oneframebase.utils.LogPrinter;
 
 public class FileUtil {
     public static final Logger logger = LoggerFactory.getLogger(FileUtil.class);

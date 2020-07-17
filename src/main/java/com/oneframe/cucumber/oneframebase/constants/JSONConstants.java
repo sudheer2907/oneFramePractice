@@ -1,4 +1,4 @@
-package com.oneframe.cucumber.projectone.constants;
+package com.oneframe.cucumber.oneframebase.constants;
 
 public final class JSONConstants {
 

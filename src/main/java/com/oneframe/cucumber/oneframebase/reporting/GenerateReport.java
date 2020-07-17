@@ -1,11 +1,11 @@
-package com.oneframe.cucumber.oneframe.reporting;
+package com.oneframe.cucumber.oneframebase.reporting;
 
 import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
 import com.github.mkolisnyk.cucumber.reporting.CucumberResultsOverview;
-import com.oneframe.cucumber.oneframe.utils.LogPrinter;
+import com.oneframe.cucumber.oneframebase.utils.LogPrinter;
 
 import net.masterthought.cucumber.Configuration;
 import net.masterthought.cucumber.ReportBuilder;
