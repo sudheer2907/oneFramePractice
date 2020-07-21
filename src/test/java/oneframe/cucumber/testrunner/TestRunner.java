@@ -20,7 +20,7 @@ import cucumber.api.testng.TestNGCucumberRunner;
 
 @CucumberOptions(monochrome = true, features = "src//test//resources//features//projectOne", glue = "oneframe.cucumber.projectone.stepdefinitions", plugin = {
         "pretty", "io.qameta.allure.cucumberjvm.AllureCucumberJvm", "html:target/test-report/cucumber",
-        "json:target/test-report/cucumber.json" }, tags = { "@UITestsample" })
+        "json:target/test-report/cucumber.json" }, tags = { "@SampleUITest" })
 public class TestRunner {
     private TestNGCucumberRunner testNGCucumberRunner;
     private static String scenarioName = null;

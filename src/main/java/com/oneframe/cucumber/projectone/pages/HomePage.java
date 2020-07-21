@@ -24,9 +24,11 @@ public class HomePage {
      *
      * @param tabString
      *            - tab name.
+     * @throws Exception
+     *             - exception if occured any.
      * @author sudheer.singh
      */
-    public void clickonTab(String tabString) {
+    public void clickonTab(String tabString) throws Exception {
         System.out.println("tabString is " + tabString);
         switch (tabString) {
         case "Input Forms":

@@ -27,9 +27,11 @@ public class ProgressBars {
      *
      * @param subTabString
      *            - sub tab name.
+     * @throws Exception
+     *             - exception if any occured.
      * @author sudheer.singh
      */
-    public void clickOnSubtab(String subTabString) {
+    public void clickOnSubtab(String subTabString) throws Exception {
         switch (subTabString) {
         case "JQuery Download Progress bars":
             WebDriverFactory.clickWebElement(subTabJQueryDownloadProgressbars);

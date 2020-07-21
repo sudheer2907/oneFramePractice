@@ -46,7 +46,7 @@ public class SimpleFormDemoPage {
     @FindBy(xpath = "//label[contains(text(),'Your Message:')]/following-sibling::span")
     private WebElement labelGetShowMessageOutput;
 
-    public void acceptAnAlert() {
+    public void acceptAnAlert() throws Exception {
         WebDriverFactory.waitForAnElementToBeVisible(acceptAnAlert, 20);
         WebDriverFactory.clickWebElement(acceptAnAlert);
     }
@@ -56,9 +56,11 @@ public class SimpleFormDemoPage {
      *
      * @param subTabString
      *            - sub tab name.
+     * @throws Exception
+     *             - exeception if any occured.
      * @author sudheer.singh
      */
-    public void clickOnSubtab(String subTabString) {
+    public void clickOnSubtab(String subTabString) throws Exception {
         switch (subTabString) {
         case "Simple Form Demo":
             WebDriverFactory.clickWebElement(subTabSimpleFormDemo);
@@ -91,18 +93,22 @@ public class SimpleFormDemoPage {
      *
      * @param arg
      *            - text to be entered into message textbox.
+     * @throws Exception
+     *             - exception if any occured.
      * @author sudheer.singh
      */
-    public void enterTextIntoMessageBox(String arg) {
+    public void enterTextIntoMessageBox(String arg) throws Exception {
         WebDriverFactory.sendKeys(txtBoxEnterMessage, arg);
     }
 
     /**
      * Click show message button.
      *
+     * @throws Exception
+     *             - exception if any occured.
      * @author sudheer.singh
      */
-    public void clickShowMessageButton() {
+    public void clickShowMessageButton() throws Exception {
         WebDriverFactory.clickWebElement(buttonShowMessage);
     }
 

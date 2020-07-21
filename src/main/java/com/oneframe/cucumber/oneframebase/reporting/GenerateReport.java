@@ -47,7 +47,7 @@ public class GenerateReport {
      */
     public static void generateCucumberReport(String projectName, String reportFolderName) {
         File reportOutputDirectory = new File(reportFolderName);
-        List<String> jsonFiles = new ArrayList();
+        List<String> jsonFiles = new ArrayList<String>();
         jsonFiles.add(System.getProperty("user.dir") + "\\" + reportFolderName + "\\cucumber.json");
         String jenkinsBasePath = "";
         String buildNumber = "version 1";

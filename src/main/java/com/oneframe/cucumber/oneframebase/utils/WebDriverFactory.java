@@ -5,6 +5,7 @@ import java.io.IOException;
 import java.util.concurrent.TimeUnit;
 
 import org.apache.commons.io.FileUtils;
+import org.junit.Assert;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.OutputType;
 import org.openqa.selenium.TakesScreenshot;
@@ -18,8 +19,6 @@ import org.openqa.selenium.support.ui.ExpectedCondition;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
-import org.testng.Assert;
-import org.testng.TestException;
 
 public abstract class WebDriverFactory {
     private static WebDriver driver;
@@ -136,11 +135,13 @@ public abstract class WebDriverFactory {
      *
      * @param element
      *            - web element.
+     * @throws Exception
+     *             - exception if any occured.
      * @author sudheer.singh
      */
-    public static void clickWebElement(WebElement element) {
+    public static void clickWebElement(WebElement element) throws Exception {
         if (!element.isEnabled()) {
-            throw new TestException(element.getText() + " is not clickable");
+            throw new Exception(element.getText() + " is not clickable");
         }
         try {
             highlight(element);
@@ -157,11 +158,13 @@ public abstract class WebDriverFactory {
      *            - web element.
      * @param text
      *            - text to be entered into text box.
+     * @throws Exception
+     *             - exception if any occured.
      * @author sudheer.singh
      */
-    public static void sendKeys(WebElement element, String text) {
+    public static void sendKeys(WebElement element, String text) throws Exception {
         if (!element.isEnabled()) {
-            throw new TestException("WebElement " + element + " is not editabe as It is disabled");
+            throw new Exception("WebElement " + element + " is not editabe as It is disabled");
         }
         try {
             highlight(element);
@@ -178,11 +181,13 @@ public abstract class WebDriverFactory {
      *            - web element.
      * @param dropDownValue
      *            - drop value to be selected.
+     * @throws Exception
+     *             - exceeption if any occured.
      * @author sudheer.singh
      */
-    public static void selectElementByvalue(WebElement element, String dropDownValue) {
+    public static void selectElementByvalue(WebElement element, String dropDownValue) throws Exception {
         if (!element.isEnabled()) {
-            throw new TestException("WebElement " + element + " is not editabe as It is disabled");
+            throw new Exception("WebElement " + element + " is not editabe as It is disabled");
         }
         try {
             highlight(element);

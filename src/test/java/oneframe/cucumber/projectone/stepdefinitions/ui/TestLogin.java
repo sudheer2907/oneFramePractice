@@ -10,7 +10,7 @@ public class TestLogin {
     SimpleFormDemoPage simpleFormDemoPage;
 
     @Given("^I launch and login to the application$")
-    public void i_launch_and_login_to_the_application() {
+    public void i_launch_and_login_to_the_application() throws Exception {
         WebDriverFactory.openApplication();
         simpleFormDemoPage = new SimpleFormDemoPage();
         simpleFormDemoPage.acceptAnAlert();
