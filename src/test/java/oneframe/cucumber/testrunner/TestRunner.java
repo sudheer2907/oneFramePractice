@@ -18,7 +18,7 @@ import cucumber.api.testng.TestNGCucumberRunner;
 
 @RunWith(Cucumber.class)
 
-@CucumberOptions(monochrome = true, features = "src//test//resources//features//projectOne", glue = "oneframe.cucumber.projectone.stepdefinitions", plugin = {
+@CucumberOptions(monochrome = true, features = "src//test//resources//features", glue = "oneframe.cucumber.stepdefinitions", plugin = {
         "pretty", "io.qameta.allure.cucumberjvm.AllureCucumberJvm", "html:target/test-report/cucumber",
         "json:target/test-report/cucumber.json" }, tags = { "@SampleUITest" })
 public class TestRunner {

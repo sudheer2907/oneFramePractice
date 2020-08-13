@@ -40,11 +40,29 @@ public class SimpleFormDemoPage {
     @FindBy(xpath = "//input[@id='user-message']")
     private WebElement txtBoxEnterMessage;
 
+    @FindBy(xpath = "//input[@id='sum1']")
+    private WebElement txtBoxEnterAMessage;
+
+    @FindBy(xpath = "//input[@id='sum2']")
+    private WebElement txtBoxEnterBMessage;
+
     @FindBy(xpath = "//button[contains(text(),'Show Message')]")
     private WebElement buttonShowMessage;
 
     @FindBy(xpath = "//label[contains(text(),'Your Message:')]/following-sibling::span")
     private WebElement labelGetShowMessageOutput;
+
+    @FindBy(xpath = "//button[contains(text(),'Get Total')]")
+    private WebElement btnGetTotalOutput;
+
+    @FindBy(xpath = "//span[@id='displayvalue']")
+    private WebElement labelGetTotalOutput;
+
+    @FindBy(xpath = "//input[@id='isAgeSelected']")
+    private WebElement chkBoxClickOnThisChkBox;
+
+    @FindBy(xpath = "// input[@id='isAgeSelected']")
+    private WebElement labelTextClickOnThisChkBox;
 
     public void acceptAnAlert() throws Exception {
         WebDriverFactory.waitForAnElementToBeVisible(acceptAnAlert, 20);
@@ -97,8 +115,16 @@ public class SimpleFormDemoPage {
      *             - exception if any occured.
      * @author sudheer.singh
      */
-    public void enterTextIntoMessageBox(String arg) throws Exception {
+    public void enterTextIntoEnterMessageTextBox(String arg) throws Exception {
         WebDriverFactory.sendKeys(txtBoxEnterMessage, arg);
+    }
+
+    public void enterTextIntoEnterATextBox(String arg) throws Exception {
+        WebDriverFactory.sendKeys(txtBoxEnterAMessage, arg);
+    }
+
+    public void enterTextIntoEnterBTextBox(String arg) throws Exception {
+        WebDriverFactory.sendKeys(txtBoxEnterBMessage, arg);
     }
 
     /**
@@ -120,5 +146,21 @@ public class SimpleFormDemoPage {
     public String getTextShowMessage() {
         WebDriverFactory.waitForAnElementToBeVisible(labelGetShowMessageOutput, 4);
         return labelGetShowMessageOutput.getText();
+    }
+
+    public void clickGetTotalValue() throws Exception {
+        WebDriverFactory.clickWebElement(btnGetTotalOutput);
+    }
+
+    public String getTotalValueText() throws Exception {
+        return labelGetTotalOutput.getText();
+    }
+
+    public void clickClickOnthIsCheckBox() throws Exception {
+        WebDriverFactory.clickWebElement(chkBoxClickOnThisChkBox);
+    }
+
+    public String getCheckBoxSelectedMessage() {
+        return labelTextClickOnThisChkBox.getText();
     }
 }
