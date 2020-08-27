@@ -1,5 +1,7 @@
 package oneframe.cucumber.stepdefinitions.seleniumeasy;
 
+import java.util.concurrent.TimeUnit;
+
 import org.testng.Assert;
 
 import com.oneframe.cucumber.projectone.pages.HomePage;
@@ -18,7 +20,6 @@ public class TestSimpleFormDemo {
 
     @And("^I click on tab (.*)$")
     public void i_click_on_tab(String tabNameString) throws Exception {
-        System.out.println("tabNameString is " + tabNameString);
         homePage.clickonTab(tabNameString);
     }
 
@@ -29,6 +30,9 @@ public class TestSimpleFormDemo {
             simpleFormDemoPage.clickOnSubtab(subTabNameString);
             break;
         case "Checkbox Demo":
+            simpleFormDemoPage.clickOnSubtab(subTabNameString);
+            break;
+        case "Radio Buttons Demo":
             simpleFormDemoPage.clickOnSubtab(subTabNameString);
             break;
         }
@@ -61,13 +65,15 @@ public class TestSimpleFormDemo {
     public void i_verify_putput_message_is_sample(String arg1, String arg2) throws Exception {
         switch (arg1) {
         case "single":
-            String showMessageOutputString = simpleFormDemoPage.getTextShowMessage();
-            System.out.println("Show message output is " + showMessageOutputString);
+            Assert.assertTrue(simpleFormDemoPage.getTextShowMessage().equalsIgnoreCase(arg2),
+                    "Textbox Output message is not verified, Expected message:" + arg2 + " Found:"
+                            + simpleFormDemoPage.getTextShowMessage());
             break;
         case "double":
             simpleFormDemoPage.clickGetTotalValue();
-            String getTotalValue = simpleFormDemoPage.getTotalValueText();
-            System.out.println("Show message output is " + getTotalValue);
+            Assert.assertTrue(simpleFormDemoPage.getTotalValueText().equalsIgnoreCase(arg2),
+                    "Get Total Value is not verified, Expected message:" + arg2 + " Found:"
+                            + simpleFormDemoPage.getTotalValueText());
             break;
         default:
             Assert.fail("Wrong text box value found");
@@ -88,6 +94,37 @@ public class TestSimpleFormDemo {
 
     @Then("^I verify Success - Check box is checked message is displayed$")
     public void i_verify_checkboxMessage() {
-        System.out.println(simpleFormDemoPage.getCheckBoxSelectedMessage());
+        Assert.assertTrue(
+                simpleFormDemoPage.getCheckBoxSelectedMessage().equalsIgnoreCase("Success - Check box is checked"),
+                "Message displayed after clicking Checkbox is not correct");
+    }
+
+    @And("^I select gender as (.*) radio button under section (.*)$")
+    public void i_select_gender(String genderString, String sectionName) throws Exception {
+        switch (sectionName) {
+        case "Radio Button Demo":
+            simpleFormDemoPage.selectGenderUnderRadioButtonDemo("Male");
+            TimeUnit.SECONDS.sleep(10);
+            break;
+        case "Group Radio Buttons Demo":
+            simpleFormDemoPage.selectGenderUnderGroupRadioButtonDemo("Male");
+            TimeUnit.SECONDS.sleep(10);
+            break;
+        default:
+            break;
+        }
+    }
+
+    @When("^I click on get checked value button$")
+    public void i_click_on_get_checked_value_button() {
+        simpleFormDemoPage.clickGetValueButton();
+    }
+
+    @Then("^I verify output message displayed as Radio button 'Male' is checked$")
+    public void i_verify_output_message_displayed_as_radio_button() {
+        Assert.assertTrue(
+                simpleFormDemoPage.getResultAfterClickingGetCheckedValues()
+                        .equalsIgnoreCase("Radio button 'Male' is checked"),
+                "Message displayed after clicking get values button is not correct");
     }
 }

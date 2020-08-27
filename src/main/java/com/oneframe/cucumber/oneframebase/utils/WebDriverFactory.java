@@ -15,269 +15,247 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.interactions.Actions;
-import org.openqa.selenium.support.ui.ExpectedCondition;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 public abstract class WebDriverFactory {
-    private static WebDriver driver;
-    static String path;
 
-    /**
-     * Launch application and navigate to the base url to start the execution.
-     *
-     * @author sudheer.singh
-     */
-    public static void openApplication() {
-        String bwoserNameString = Utilities.getEnvironmentProperties("browser");
-        path = System.getProperty("user.dir");
-        switch (bwoserNameString.toUpperCase()) {
-        case "CHROME":
-            System.setProperty("webdriver.chrome.driver", path + "/drivers/chromedriver.exe");
-            setDriver(new ChromeDriver());
-            break;
-        case "FIREFOX":
-            setDriver(new FirefoxDriver());
-            break;
-        default:
-            Assert.fail("Wrong browser Name provided.");
-        }
-        getDriver().manage().window().maximize();
-        getDriver().get(Utilities.getEnvironmentProperties("baseUrl"));
-    }
+  private WebDriverFactory() {
+    LogPrinter.printLog("Can not be intantiated");
+  }
 
-    /**
-     * Wait for Page to Load.
-     *
-     * @param timeout
-     *            - page load time out.
-     * @author sudheer.singh
-     */
-    public static void waitForPageToLoad(int timeout) {
-        new WebDriverWait(driver, timeout).until(new ExpectedCondition<Boolean>() {
-            @Override
-            public Boolean apply(WebDriver input) {
-                return ((JavascriptExecutor) driver).executeScript("return document.readyState").toString()
-                        .equals("complete");
-            }
-        });
-    }
+  private static WebDriver driver;
+  static String path;
 
-    /**
-     * get web driver instance.
-     *
-     * @return - web driver.
-     */
-    public static WebDriver getDriver() {
-        return driver;
+  /**
+   * Launch application and navigate to the base url to start the execution.
+   *
+   * @author sudheer.singh
+   */
+  public static void openApplication() {
+    String bwoserNameString = Utilities.getEnvironmentProperties("browser");
+    path = System.getProperty("user.dir");
+    switch (bwoserNameString.toUpperCase()) {
+      case "CHROME":
+        System.setProperty("webdriver.chrome.driver", path + "/drivers/chromedriver.exe");
+        setDriver(new ChromeDriver());
+        break;
+      case "FIREFOX":
+        setDriver(new FirefoxDriver());
+        break;
+      default:
+        Assert.fail("Wrong browser Name provided.");
     }
+    getDriver().manage().window().maximize();
+    getDriver().get(Utilities.getEnvironmentProperties("baseUrl"));
+  }
 
-    /**
-     * Set web driver.
-     *
-     * @param driver
-     *            - web driver.
-     */
-    public static void setDriver(WebDriver driver) {
-        WebDriverFactory.driver = driver;
-    }
+  /**
+   * Wait for Page to Load.
+   *
+   * @param timeout - page load time out.
+   * @author sudheer.singh
+   */
+  public static void waitForPageToLoad(int timeout) {
+    new WebDriverWait(driver, timeout).until((WebDriver driver) -> {
+      return ((JavascriptExecutor) driver).executeScript("return document.readyState").toString()
+          .equals("complete");
 
-    /**
-     * Close window.
-     */
-    public static void closeWindow() {
-        if (driver != null) {
-            getDriver().close();
-            getDriver().quit();
-            WebDriverFactory.driver = null;
-        }
-    }
+    });
+  }
 
-    /**
-     * Highlight web element while ececution.
-     *
-     * @param element
-     *            - web element to be highlighted
-     * @throws InterruptedException
-     *             - if in case of interrupted exception.
-     * @author sudheer.singh
-     */
-    public static void highlight(WebElement element) throws InterruptedException {
-        JavascriptExecutor js = (JavascriptExecutor) getDriver();
-        js.executeScript("arguments[0].setAttribute('style', 'border: 3px solid yellow;');", element);
-        TimeUnit.SECONDS.sleep(1);
-        js.executeScript("arguments[0].setAttribute('style','border: solid 2px white');", element);
-    }
+  /**
+   * get web driver instance.
+   *
+   * @return - web driver.
+   */
+  public static WebDriver getDriver() {
+    return driver;
+  }
 
-    /**
-     * Take screenshots before test case failed.
-     *
-     * @param driver
-     *            - web driver.
-     * @param screenshotname
-     *            - name of screenshot.
-     * @author sudheer.singh
-     */
-    public static void captureScreenShot(WebDriver driver, String screenshotname) {
-        String path = System.getProperty("user.dir");
-        File src = ((TakesScreenshot) driver).getScreenshotAs(OutputType.FILE);
-        try {
-            FileUtils.copyFile(src, new File(path + "/target/test-report/sceenshots/" + screenshotname + ".jpeg"));
-        } catch (IOException e) {
-            LogPrinter.printLog("Unable to take screenshots");
-            LogPrinter.printLog(e.getMessage());
-        }
-    }
+  /**
+   * Set web driver.
+   *
+   * @param driver - web driver.
+   */
+  public static void setDriver(WebDriver driver) {
+    WebDriverFactory.driver = driver;
+  }
 
-    /**
-     * Click on the web element.
-     *
-     * @param element
-     *            - web element.
-     * @throws Exception
-     *             - exception if any occured.
-     * @author sudheer.singh
-     */
-    public static void clickWebElement(WebElement element) throws Exception {
-        if (!element.isEnabled()) {
-            throw new Exception(element.getText() + " is not clickable");
-        }
-        try {
-            highlight(element);
-            element.click();
-        } catch (Exception e) {
-            captureScreenShot(WebDriverFactory.getDriver(), element.getText());
-        }
+  /**
+   * Close window.
+   */
+  public static void closeWindow() {
+    if (driver != null) {
+      getDriver().close();
+      getDriver().quit();
+      WebDriverFactory.driver = null;
     }
+  }
 
-    /**
-     * enter text into text field.
-     *
-     * @param element
-     *            - web element.
-     * @param text
-     *            - text to be entered into text box.
-     * @throws Exception
-     *             - exception if any occured.
-     * @author sudheer.singh
-     */
-    public static void sendKeys(WebElement element, String text) throws Exception {
-        if (!element.isEnabled()) {
-            throw new Exception("WebElement " + element + " is not editabe as It is disabled");
-        }
-        try {
-            highlight(element);
-            element.sendKeys(text);
-        } catch (Exception e) {
-            System.out.println(e);
-        }
-    }
+  /**
+   * Highlight web element while ececution.
+   *
+   * @param element - web element to be highlighted
+   * @throws InterruptedException - if in case of interrupted exception.
+   * @author sudheer.singh
+   */
+  public static void highlight(WebElement element) throws InterruptedException {
+    JavascriptExecutor js = (JavascriptExecutor) getDriver();
+    js.executeScript("arguments[0].setAttribute('style', 'border: 3px solid yellow;');", element);
+    TimeUnit.SECONDS.sleep(1);
+    js.executeScript("arguments[0].setAttribute('style','border: solid 2px white');", element);
+  }
 
-    /**
-     * Select element or drop-down value from a drop-down.
-     *
-     * @param element
-     *            - web element.
-     * @param dropDownValue
-     *            - drop value to be selected.
-     * @throws Exception
-     *             - exceeption if any occured.
-     * @author sudheer.singh
-     */
-    public static void selectElementByvalue(WebElement element, String dropDownValue) throws Exception {
-        if (!element.isEnabled()) {
-            throw new Exception("WebElement " + element + " is not editabe as It is disabled");
-        }
-        try {
-            highlight(element);
-            Select sel = new Select(element);
-            sel.selectByValue(dropDownValue);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+  /**
+   * Take screenshots before test case failed.
+   *
+   * @param driver - web driver.
+   * @param screenshotname - name of screenshot.
+   * @author sudheer.singh
+   */
+  public static void captureScreenShot(WebDriver driver, String screenshotname) {
+    String path = System.getProperty("user.dir");
+    File src = ((TakesScreenshot) driver).getScreenshotAs(OutputType.FILE);
+    try {
+      FileUtils.copyFile(src,
+          new File(path + "/target/test-report/sceenshots/" + screenshotname + ".jpeg"));
+    } catch (IOException e) {
+      LogPrinter.printLog("Unable to take screenshots");
+      LogPrinter.printLog(e.getMessage());
     }
+  }
 
-    /**
-     * Wait for an element to be visible.
-     *
-     * @param element
-     *            - web element.
-     * @param timeOut
-     *            - waiting time period.
-     * @author sudheer.singh
-     */
-    public static void waitForAnElementToBeVisible(WebElement element, int timeOut) {
-        WebDriverWait wait = new WebDriverWait(driver, timeOut);
-        wait.until(ExpectedConditions.visibilityOf(element));
+  /**
+   * Click on the web element.
+   *
+   * @param element - web element.
+   * @author sudheer.singh
+   */
+  public static void clickWebElement(WebElement element) {
+    if (!element.isEnabled()) {
+      throw new WebDriverException(element.getText() + " is not clickable");
     }
+    try {
+      highlight(element);
+      element.click();
+    } catch (Exception e) {
+      captureScreenShot(WebDriverFactory.getDriver(), element.getText());
+    }
+  }
 
-    /**
-     * Refresh current page.
-     */
-    public static void refresh() {
-        driver.navigate().refresh();
+  /**
+   * enter text into text field.
+   *
+   * @param element - web element.
+   * @param text - text to be entered into text box.
+   * @author sudheer.singh
+   */
+  public static void sendKeys(WebElement element, String text) {
+    if (!element.isEnabled()) {
+      throw new WebDriverException("WebElement " + element + " is not editabe as It is disabled");
     }
+    try {
+      highlight(element);
+      element.sendKeys(text);
+    } catch (Exception e) {
+      LogPrinter.printLog(e.getMessage());
+    }
+  }
 
-    /**
-     * Mouse hover over an element.
-     *
-     * @param element
-     *            - web element.
-     * @author sudheer.singh
-     */
-    public static void mouseHoverOnElement(WebElement element) {
-        Actions actions = new Actions(driver);
-        actions.moveToElement(element).build().perform();
+  /**
+   * Select element or drop-down value from a drop-down.
+   *
+   * @param element - web element.
+   * @param dropDownValue - drop value to be selected.
+   * @author sudheer.singh
+   */
+  public static void selectElementByvalue(WebElement element, String dropDownValue) {
+    if (!element.isEnabled()) {
+      throw new WebDriverException("WebElement " + element + " is not editabe as It is disabled");
     }
+    try {
+      highlight(element);
+      Select sel = new Select(element);
+      sel.selectByValue(dropDownValue);
+    } catch (Exception e) {
+      LogPrinter.printLog(e.getMessage());
+    }
+  }
 
-    /**
-     * Wait for Element to be visible on Screen before performing any action and
-     * Ignoring any Selenium Exception.
-     *
-     * @param elementLocator
-     *            - web element.
-     * @param timeout
-     *            - timeout period.
-     * @param klass
-     *            - class
-     */
-    public static void waitForElementForVisibilityIgnoringException(WebElement elementLocator, int timeout,
-            Class<? extends WebDriverException> klass) {
-        WebDriverWait wait = new WebDriverWait(driver, timeout);
-        wait.ignoring(klass).until(ExpectedConditions.visibilityOf(elementLocator));
-    }
+  /**
+   * Wait for an element to be visible.
+   *
+   * @param element - web element.
+   * @param timeOut - waiting time period.
+   * @author sudheer.singh
+   */
+  public static void waitForAnElementToBeVisible(WebElement element, int timeOut) {
+    WebDriverWait wait = new WebDriverWait(driver, timeOut);
+    wait.until(ExpectedConditions.visibilityOf(element));
+  }
 
-    /**
-     * Switch to child or parent window.
-     *
-     * @param windowHandle
-     *            - window to be switche into.
-     * @author sudheer.singh
-     */
-    public static void switchToWindow(String windowHandle) {
-        if (windowHandle == null) {
-            LogPrinter.printLog("No second window in the browser is present");
-            return;
-        }
-        driver.switchTo().window(windowHandle);
-    }
+  /**
+   * Refresh current page.
+   */
+  public static void refresh() {
+    driver.navigate().refresh();
+  }
 
-    /**
-     * Switch into frame.
-     *
-     * @param elementLocator
-     *            - web element.
-     * @author sudheer.singh
-     */
-    public static void switchToFrameInDom(WebElement elementLocator) {
-        driver.switchTo().frame(elementLocator);
-    }
+  /**
+   * Mouse hover over an element.
+   *
+   * @param element - web element.
+   * @author sudheer.singh
+   */
+  public static void mouseHoverOnElement(WebElement element) {
+    Actions actions = new Actions(driver);
+    actions.moveToElement(element).build().perform();
+  }
 
-    /**
-     * Close then current open window.
-     */
-    public static void closeCurrentBrowserWindow() {
-        driver.close();
+  /**
+   * Wait for Element to be visible on Screen before performing any action and Ignoring any Selenium
+   * Exception.
+   *
+   * @param elementLocator - web element.
+   * @param timeout - timeout period.
+   * @param klass - class
+   */
+  public static void waitForElementForVisibilityIgnoringException(WebElement elementLocator,
+      int timeout, Class<? extends WebDriverException> klass) {
+    WebDriverWait wait = new WebDriverWait(driver, timeout);
+    wait.ignoring(klass).until(ExpectedConditions.visibilityOf(elementLocator));
+  }
+
+  /**
+   * Switch to child or parent window.
+   *
+   * @param windowHandle - window to be switche into.
+   * @author sudheer.singh
+   */
+  public static void switchToWindow(String windowHandle) {
+    if (windowHandle == null) {
+      LogPrinter.printLog("No second window in the browser is present");
+      return;
     }
+    driver.switchTo().window(windowHandle);
+  }
+
+  /**
+   * Switch into frame.
+   *
+   * @param elementLocator - web element.
+   * @author sudheer.singh
+   */
+  public static void switchToFrameInDom(WebElement elementLocator) {
+    driver.switchTo().frame(elementLocator);
+  }
+
+  /**
+   * Close then current open window.
+   */
+  public static void closeCurrentBrowserWindow() {
+    driver.close();
+  }
 }
