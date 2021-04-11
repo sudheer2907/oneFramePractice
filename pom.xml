@@ -2,8 +2,8 @@
     xmlns="http://maven.apache.org/POM/4.0.0"
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
-    <groupId>org.oneframe</groupId>
-    <artifactId>org.oneframe.common</artifactId>
+    <groupId>learning</groupId>
+    <artifactId>api_ui</artifactId>
     <version>0.0.1</version>
     <name>OneFrameSampleProject</name>
     <url>http://maven.apache.org</url>
@@ -11,22 +11,56 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <jre.level>1.8</jre.level>
         <jdk.level>1.8</jdk.level>
+        <cucumber.version>5.7.0</cucumber.version>
         <checksyle.rule.file>code-compliances/checkstyle-rules.xml</checksyle.rule.file>
         <findbugs.rule.file>code-compliances/findbugs_exclude_filter.xml</findbugs.rule.file>
-        <checkstyle.check.skip>false</checkstyle.check.skip>
-        <cpd.skip>false</cpd.skip>
-        <pmd.check.skip>false</pmd.check.skip>
-        <findbugs.check.skip>false</findbugs.check.skip>
-        <pmd.failure>true</pmd.failure>
+        <checkstyle.check.skip>true</checkstyle.check.skip>
+        <cpd.skip>true</cpd.skip>
+        <pmd.check.skip>true</pmd.check.skip>
+        <findbugs.check.skip>true</findbugs.check.skip>
+        <pmd.failure>false</pmd.failure>
         <findbugs.failure>false</findbugs.failure>
-        <checkstyle.failure>true</checkstyle.failure>
+        <checkstyle.failure>false</checkstyle.failure>
     </properties>
     <dependencies>
+        <dependency>
+            <groupId>org.oneframe</groupId>
+            <artifactId>org.oneframe.common</artifactId>
+            <version>0.0.1</version>
+        </dependency>
         <dependency>
             <groupId>net.masterthought</groupId>
             <artifactId>maven-cucumber-reporting</artifactId>
             <version>2.8.0</version>
         </dependency>
+        <dependency>
+           <groupId>io.cucumber</groupId>
+           <artifactId>cucumber-java8</artifactId>
+           <version>${cucumber.version}</version>
+       </dependency>
+       <dependency>
+           <groupId>io.cucumber</groupId>
+           <artifactId>cucumber-java</artifactId>
+           <version>${cucumber.version}</version>
+       </dependency>
+       <dependency>
+           <groupId>io.cucumber</groupId>
+           <artifactId>cucumber-testng</artifactId>
+           <version>${cucumber.version}</version>
+           <scope>test</scope>
+       </dependency>
+       <dependency>
+           <groupId>io.cucumber</groupId>
+           <artifactId>cucumber-core</artifactId>
+           <version>${cucumber.version}</version>
+       </dependency>
+
+       <dependency>
+           <groupId>io.cucumber</groupId>
+           <artifactId>cucumber-junit</artifactId>
+           <version>${cucumber.version}</version>
+           <scope>test</scope>
+       </dependency>
         <dependency>
             <groupId>info.cukes</groupId>
             <artifactId>cucumber-core</artifactId>
@@ -167,6 +201,8 @@
                     <suiteXmlFiles>
                         <suiteXmlFile>testng.xml</suiteXmlFile>
                     </suiteXmlFiles>
+                    <parallel>methods</parallel>
+                    <threadCount>4</threadCount>
                 </configuration>
             </plugin>
             <plugin>
