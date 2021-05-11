@@ -1,8 +1,11 @@
 package com.oneframe.cucumber.projectone.seleniumeasypages;
 
+
 import org.junit.Assert;
 import org.openqa.selenium.By;
+import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
@@ -75,6 +78,20 @@ public class SimpleFormDemoPage {
   @FindBy(xpath = "//div[@class='panel-body']/preceding-sibling::"
       + "div[text()='Radio Button Demo']/following-sibling::div")
   private WebElement radioBtnGenderRadioButtonDemoXpath;
+
+  @FindBy(xpath = "//select[@id='select-demo']")
+  private WebElement selectDay;
+  
+  @FindBy(xpath = "//p[@class='selected-value']")
+  private WebElement lableSelectedDay;
+  
+  @FindBy(xpath = "//p[contains(text(),'Options selected')]")
+  private WebElement lableSelectedDropDown;
+
+  private String  multipleDropDownXpath = "//select[@id='multi-select']/option[@value='STR']";
+  
+  @FindBy(xpath = "//button[@id='printAll']")
+  private WebElement btnGetAllSelectedOptions;
 
   public void acceptAnAlert() {
     WebDriverFactory.waitForAnElementToBeVisible(acceptAnAlert, 20);
@@ -204,5 +221,35 @@ public class SimpleFormDemoPage {
   public String getResultAfterClickingGetCheckedValues() {
     WebDriverFactory.waitForAnElementToBeVisible(labelTextGetValuesResult, 10);
     return labelTextGetValuesResult.getText();
+  }
+  
+  public void selectDay(String str) {
+    WebDriverFactory.selectElementByvalue(selectDay, str);
+  }
+  
+  public String getSelectedDay() {
+    WebDriverFactory.waitForAnElementToBeVisible(lableSelectedDay, 10);
+    return lableSelectedDay.getText().substring(16);
+  }
+  
+  public void selectMultipleDropDown(String value1,String value2, String value3) {
+    String selectValue1 = multipleDropDownXpath.replace("STR", value1);
+    String selectValue2 = multipleDropDownXpath.replace("STR", value2);
+    String selectValue3 = multipleDropDownXpath.replace("STR", value3);
+    Actions actions = new Actions(WebDriverFactory.getDriver());
+    actions.keyDown(Keys.CONTROL).build().perform();
+    WebDriverFactory.getDriver().findElement(By.xpath(selectValue1)).click();
+    WebDriverFactory.getDriver().findElement(By.xpath(selectValue2)).click();
+    WebDriverFactory.getDriver().findElement(By.xpath(selectValue3)).click();
+    actions.keyUp(Keys.CONTROL).build().perform();
+  }
+
+  public String getSelectedDropDown() {
+    WebDriverFactory.waitForAnElementToBeVisible(lableSelectedDropDown, 10);
+    return lableSelectedDropDown.getText().substring(23);
+  }
+
+  public void clickGetAllSelectedButton() {
+    WebDriverFactory.clickWebElement(btnGetAllSelectedOptions);
   }
 }

@@ -4,6 +4,7 @@ import java.util.concurrent.TimeUnit;
 
 import org.testng.Assert;
 
+import com.oneframe.cucumber.oneframebase.utils.WebDriverFactory;
 import com.oneframe.cucumber.projectone.seleniumeasypages.HomePage;
 import com.oneframe.cucumber.projectone.seleniumeasypages.ProgressBars;
 import com.oneframe.cucumber.projectone.seleniumeasypages.SimpleFormDemoPage;
@@ -33,6 +34,9 @@ public class TestSimpleFormDemo {
         simpleFormDemoPage.clickOnSubtab(subTabNameString);
         break;
       case "Radio Buttons Demo":
+        simpleFormDemoPage.clickOnSubtab(subTabNameString);
+        break;
+      case "Select Dropdown List":
         simpleFormDemoPage.clickOnSubtab(subTabNameString);
         break;
     }
@@ -127,5 +131,35 @@ public class TestSimpleFormDemo {
         simpleFormDemoPage.getResultAfterClickingGetCheckedValues()
             .equalsIgnoreCase("Radio button 'Male' is checked"),
         "Message displayed after clicking get values button is not correct");
+  }
+
+  @And("^I select dropdown value as (.*)$")
+  public void i_select_dropdown_value_as(String str) {
+    simpleFormDemoPage.selectDay(str);
+  }
+
+  @Then("^I verify selected day is (.*)$")
+  public void i_verify_selected_day(String str) {
+    Assert.assertTrue(simpleFormDemoPage.getSelectedDay().equalsIgnoreCase(str));
+  }
+
+  @And("^I select multiple dropdown value as (.*),(.*),(.*)$")
+  public void i_select_multiple_dropdown_value(String value1, String value2, String value3) throws InterruptedException {
+    simpleFormDemoPage.selectMultipleDropDown(value1, value2, value3);
+  }
+ 
+  @When("^I click on Get All Selected button$")
+  public void i_click_on_get_all_selected_button() throws InterruptedException {
+    simpleFormDemoPage.clickGetAllSelectedButton();
+    TimeUnit.SECONDS.sleep(5);
+  }
+
+  @Then("^I verify multiple dropdown value is selected as (.*),(.*),(.*)$")
+  public void i_verify_multiple_dropdown_value_is_selected(String value1, String value2, String value3) {
+    String selectedDropDownString = simpleFormDemoPage.getSelectedDropDown();
+    System.out.println("print" + selectedDropDownString);
+    //Assert.assertTrue(selectedDropDownString.contains(value1));
+    //Assert.assertTrue(selectedDropDownString.contains(value2));
+    Assert.assertTrue(selectedDropDownString.contains(value3));
   }
 }
