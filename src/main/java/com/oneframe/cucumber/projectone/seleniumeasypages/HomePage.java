@@ -19,6 +19,9 @@ public class HomePage {
   @FindBy(xpath = "//a[@class='dropdown-toggle'][contains(text(),'Progress Bars')]")
   private WebElement tabProgressBars;
 
+  @FindBy(xpath = "//a[@class='dropdown-toggle'][contains(text(),'Table')]")
+  private WebElement tabTable;
+
   /**
    * Click on tab.
    *
@@ -33,6 +36,9 @@ public class HomePage {
         break;
       case "Progress Bars":
         WebDriverFactory.clickWebElement(tabProgressBars);
+        break;
+      case "Table":
+        WebDriverFactory.clickWebElement(tabTable);
         break;
       default:
         Assert.fail("Wrong Sub tab name is provided.");

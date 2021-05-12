@@ -1,7 +1,7 @@
 package com.oneframe.cucumber.projectone.seleniumeasypages;
 
-
 import org.junit.Assert;
+
 import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebElement;
@@ -231,7 +231,14 @@ public class SimpleFormDemoPage {
     WebDriverFactory.waitForAnElementToBeVisible(lableSelectedDay, 10);
     return lableSelectedDay.getText().substring(16);
   }
-  
+
+  /**
+   * Select multiple drop down from multi select dropdown options.
+   * @param value1 - 1st valued to be selected.
+   * @param value2 - 2nd value to be selected.
+   * @param value3 - 3rd value to be selected.
+   * @author Sudheer.Singh
+   */
   public void selectMultipleDropDown(String value1,String value2, String value3) {
     String selectValue1 = multipleDropDownXpath.replace("STR", value1);
     String selectValue2 = multipleDropDownXpath.replace("STR", value2);

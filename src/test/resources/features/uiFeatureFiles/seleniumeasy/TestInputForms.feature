@@ -1,5 +1,5 @@
 @TestUI 
-Feature: This is sample UI test. 
+Feature: This is sample UI test for simple input form.
 
 Scenario: 01 Test Single Input Fields 
     Given I launch and login to the application 
@@ -49,7 +49,7 @@ Scenario Outline: 05 Test Select Single drop down
     |Monday |
 
 Scenario Outline: 06 Test Select multiple dropdown
-		Given I launch and login to the application 
+    Given I launch and login to the application
     And I click on tab Input Forms 
     And I click on sub tab Select Dropdown List of Input Forms page
     And I select multiple dropdown value as <value1>,<value2>,<value3>
@@ -58,4 +58,4 @@ Scenario Outline: 06 Test Select multiple dropdown
     
     Examples:
     |value1	|value2  |value3   |
-		|Texas  |Florida |New York |
+	|Texas  |Florida |New York |

@@ -9,7 +9,6 @@ import org.testng.annotations.Test;
 
 import com.oneframe.cucumber.oneframebase.reporting.GenerateReport;
 import com.oneframe.cucumber.oneframebase.utils.LogPrinter;
-import com.oneframe.cucumber.oneframebase.utils.WebDriverFactory;
 import com.oneframe.cucumber.oneframebase.utils.timeutils.TimeDurationCalculator;
 
 import cucumber.api.CucumberOptions;
