@@ -6,7 +6,6 @@ import java.util.concurrent.TimeUnit;
 
 import org.junit.Assert;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.interactions.Action;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
@@ -16,9 +15,6 @@ public class DragAndDropProgressBarsPage {
   public DragAndDropProgressBarsPage() {
     PageFactory.initElements(WebDriverFactory.getDriver(), this);
   }
-
-  @FindBy(xpath = "//div[@class='range']//input[@name='range']/following-sibling::output")
-  private WebElement sliderFisrtSliderValue;
 
   @FindBy(xpath = "//a[contains(text(),'Drag & Drop Sliders')]")
   private WebElement subTabDragAndDropSliders;
@@ -43,18 +39,16 @@ public class DragAndDropProgressBarsPage {
   }
 
   /**
-   * Move slider pointer.
+   * Move grey slider pointer.
    *
    * @param value - value tp be slide.
    * @throws InterruptedException - if in case of interrupted exceptions.
-   * 
    */
   public void moveGreySlider(int value) throws InterruptedException {
     WebDriverFactory.waitForAnElementToBeVisible(sliderGrey, 10);
     Actions move = new Actions(WebDriverFactory.getDriver());
-    Action action = move.dragAndDropBy(sliderGrey, 30, 0).build();
-    action.perform();
-    TimeUnit.SECONDS.sleep(10);
+    move.dragAndDropBy(sliderGrey, value, 0).release().perform();
+    TimeUnit.SECONDS.sleep(5);
   }
 
   /**
@@ -63,7 +57,6 @@ public class DragAndDropProgressBarsPage {
    * @author sudheer.singh
    */
   public String getFirstSliderValue() {
-    System.out.println(sliderFisrtSliderValue.getText());
-    return sliderFisrtSliderValue.getText();
+    return sliderGrey.getText();
   }
 }

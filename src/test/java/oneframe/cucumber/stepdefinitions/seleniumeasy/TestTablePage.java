@@ -43,7 +43,7 @@ public class TestTablePage {
 
   @Then("^I verify (.*) row data$")
   public void i_verify_first_row_data(int rowNum) {
-    System.out.println((tablePage.getTableRowData(rowNum).toString()));
+    System.out.println(tablePage.getTableRowData(rowNum).toString());
     Assert.assertTrue(tablePage.getTableRowData(rowNum).get(0).equalsIgnoreCase(String.valueOf(rowNum)));
     Assert.assertTrue(tablePage.getTableRowData(rowNum).get(1).equalsIgnoreCase("Table cell"));
     Assert.assertTrue(tablePage.getTableRowData(rowNum).get(5).equalsIgnoreCase("Table cell"));

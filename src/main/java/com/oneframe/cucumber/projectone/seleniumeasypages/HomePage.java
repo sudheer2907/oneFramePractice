@@ -22,6 +22,9 @@ public class HomePage {
   @FindBy(xpath = "//a[@class='dropdown-toggle'][contains(text(),'Table')]")
   private WebElement tabTable;
 
+  @FindBy(xpath = "//a[@class='dropdown-toggle'][contains(text(),'Alerts & Modals')]")
+  private WebElement alertsAndModals;
+
   /**
    * Click on tab.
    *
@@ -39,6 +42,9 @@ public class HomePage {
         break;
       case "Table":
         WebDriverFactory.clickWebElement(tabTable);
+        break;
+      case "Alerts & Modals":
+        WebDriverFactory.clickWebElement(alertsAndModals);
         break;
       default:
         Assert.fail("Wrong Sub tab name is provided.");

@@ -4,8 +4,6 @@ import java.util.concurrent.TimeUnit;
 
 import org.testng.Assert;
 
-import com.oneframe.cucumber.projectone.seleniumeasypages.HomePage;
-import com.oneframe.cucumber.projectone.seleniumeasypages.ProgressBars;
 import com.oneframe.cucumber.projectone.seleniumeasypages.SimpleFormDemoPage;
 
 import cucumber.api.java.en.And;
@@ -15,13 +13,6 @@ import cucumber.api.java.en.When;
 public class TestSimpleFormDemo {
 
   SimpleFormDemoPage simpleFormDemoPage = new SimpleFormDemoPage();
-  HomePage homePage = new HomePage();
-  ProgressBars progressBars = new ProgressBars();
-
-  @And("^I click on tab (.*)$")
-  public void i_click_on_tab(String tabNameString) throws Exception {
-    homePage.clickonTab(tabNameString);
-  }
 
   @And("^I click on sub tab (.*) of Input Forms page$")
   public void i_click_on_sub_tab(String subTabNameString) throws Exception {

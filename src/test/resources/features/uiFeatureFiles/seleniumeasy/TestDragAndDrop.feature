@@ -1,7 +1,6 @@
 @TestUI
-Feature: This is sample UI test for table.
+Feature: This is sample UI test for Drag And Drop Module.
 
-  @inp
   Scenario: Test Drag and Drop Page
     Given I launch and login to the application
     And I click on tab Progress Bars
