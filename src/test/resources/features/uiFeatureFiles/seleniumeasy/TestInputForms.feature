@@ -1,5 +1,6 @@
-@TestUI 
-Feature: This is sample UI test for simple input form.
+@TestUI
+@TestInputForms 
+Feature: Test Simple Input Form.
 
 Scenario: 01 Test Single Input Fields 
     Given I launch and login to the application 
@@ -31,10 +32,10 @@ Scenario Outline: 04 Test single radio button
     And I select gender as <gender> radio button under section <sectionName> 
     When I click on get checked value button 
     Then I verify output message displayed as Radio button 'Male' is checked 
-    
+
     Examples: 
-        | gender | sectionName       |
-        | Male   | Radio Button Demo |
+    | gender | sectionName       |
+    | Male   | Radio Button Demo |
 
 Scenario Outline: 05 Test Select Single drop down
 		Given I launch and login to the application 
@@ -42,7 +43,7 @@ Scenario Outline: 05 Test Select Single drop down
     And I click on sub tab Select Dropdown List of Input Forms page
     And I select dropdown value as <value>
     Then I verify selected day is <value>
-    
+
     Examples:
     |value	|
     |Sunday |
@@ -55,7 +56,7 @@ Scenario Outline: 06 Test Select multiple dropdown
     And I select multiple dropdown value as <value1>,<value2>,<value3>
     When I click on Get All Selected button
     Then I verify multiple dropdown value is selected as <value1>,<value2>,<value3>
-    
+
     Examples:
     |value1	|value2  |value3   |
-	|Texas  |Florida |New York |
+	  |Texas  |Florida |New York |

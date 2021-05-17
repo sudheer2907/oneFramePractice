@@ -24,7 +24,7 @@ import io.cucumber.testng.AbstractTestNGCucumberTests;
     plugin = {"pretty", "io.qameta.allure.cucumberjvm.AllureCucumberJvm",
         "html:target/test-report/cucumber", "json:target/test-report/cucumber.json",
         "rerun:target/rerun.txt"},
-    tags = {"@inp"})
+    tags = {"@TestAlertsAndModals"})
 public class TestRunner extends AbstractTestNGCucumberTests {
   private TestNGCucumberRunner testNGCucumberRunner;
   private static String scenarioName = null;
