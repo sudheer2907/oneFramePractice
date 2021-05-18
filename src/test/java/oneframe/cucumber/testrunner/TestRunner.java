@@ -24,7 +24,7 @@ import io.cucumber.testng.AbstractTestNGCucumberTests;
     plugin = {"pretty", "io.qameta.allure.cucumberjvm.AllureCucumberJvm",
         "html:target/test-report/cucumber", "json:target/test-report/cucumber.json",
         "rerun:target/rerun.txt"},
-    tags = {"@TestAlertsAndModals"})
+    tags = {"@inp"})
 public class TestRunner extends AbstractTestNGCucumberTests {
   private TestNGCucumberRunner testNGCucumberRunner;
   private static String scenarioName = null;
@@ -65,8 +65,6 @@ public class TestRunner extends AbstractTestNGCucumberTests {
     timeDurationCalculator.calculate();
     LogPrinter.printLog("Execution Took : " + timeDurationCalculator.getTimeElapsed());
     testNGCucumberRunner.finish();
-    //WebDriverFactory.getDriver().close();
-    //WebDriverFactory.getDriver().quit();
     GenerateReport.generateReport("oneFrame", "target/test-report");
   }
 

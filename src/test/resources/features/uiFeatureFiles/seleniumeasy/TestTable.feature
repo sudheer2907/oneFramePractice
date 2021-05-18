@@ -2,6 +2,7 @@
 @TestTable
 Feature: Test table.
 
+@inp
 Scenario: Test Rows and column of table
     Given I launch and login to the application
     And I click on tab Table
