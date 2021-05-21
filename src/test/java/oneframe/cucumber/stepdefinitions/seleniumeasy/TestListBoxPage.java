@@ -75,4 +75,17 @@ public class TestListBoxPage {
     Collections.sort(fetchedList);
     Assert.assertTrue(expectedList.equals(fetchedList));
   }
+
+  @When("^I serached (.*) into Data List filter serach box$")
+  public void i_searched_into_data_list_filter_searchbox(String input) {
+   listBox.enterTextIntoDataListFilterSearchBox(input); 
+  }
+
+  @Then("^I verify (.*) is displayed as a result$")
+  public void i_verify_data_list_filter_result(String input) {
+    List<String> fetchedList = listBox.getDataDisplayed(input);
+    for (String fetchedData : fetchedList) {
+      Assert.assertTrue(fetchedData.contains(input));
+    }
+  }
 }

@@ -1,8 +1,8 @@
 package com.oneframe.cucumber.projectone.seleniumeasypages;
 
+import com.oneframe.cucumber.oneframebase.utils.LogPrinter;
 import com.oneframe.cucumber.oneframebase.utils.WebDriverFactory;
 
-import org.junit.Assert;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
@@ -86,7 +86,7 @@ public class AlertsAndModals {
         WebDriverFactory.clickWebElement(subTabJavaScriptAlerts);
         break;
       default:
-        Assert.fail("Wrong Sub tab name is provided.");
+        LogPrinter.printLog("Wrong Sub tab name is provided.");
     }
   }
 
@@ -107,7 +107,7 @@ public class AlertsAndModals {
         WebDriverFactory.clickWebElement(btnNormalinfo);
         break;
       default:
-        Assert.fail("Wrong Sub tab name is provided.");
+        LogPrinter.printLog("Wrong button name is provided.");
     }
   }
 
@@ -126,7 +126,7 @@ public class AlertsAndModals {
       case "Normal Info":
         return messageNormalinfo.getText();
       default:
-        Assert.fail("Wrong Sub tab name is provided.");
+        LogPrinter.printLog("Wrong button name whose text to be fetched is provided.");
     }
     return null;
   }

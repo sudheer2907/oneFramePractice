@@ -43,9 +43,22 @@ public class TestTablePage {
 
   @Then("^I verify (.*) row data$")
   public void i_verify_first_row_data(int rowNum) {
-    System.out.println(tablePage.getTableRowData(rowNum).toString());
-    Assert.assertTrue(tablePage.getTableRowData(rowNum).get(0).equalsIgnoreCase(String.valueOf(rowNum)));
-    Assert.assertTrue(tablePage.getTableRowData(rowNum).get(1).equalsIgnoreCase("Table cell"));
-    Assert.assertTrue(tablePage.getTableRowData(rowNum).get(5).equalsIgnoreCase("Table cell"));
+    System.out.println(tablePage.getTableRowDataTablePaginationPage(rowNum).toString());
+    Assert.assertTrue(tablePage.getTableRowDataTablePaginationPage(rowNum).get(0)
+        .equalsIgnoreCase(String.valueOf(rowNum)));
+    Assert.assertTrue(
+        tablePage.getTableRowDataTablePaginationPage(rowNum).get(1).equalsIgnoreCase("Table cell"));
+    Assert.assertTrue(
+        tablePage.getTableRowDataTablePaginationPage(rowNum).get(5).equalsIgnoreCase("Table cell"));
+  }
+
+  @And("^I searched data (.*) into using filter by task text box$")
+  public void i_serached_data(String dataToBeSeached) {
+    tablePage.enterTextIntoSearchboxTextBox(dataToBeSeached);
+  }
+
+  @Then("^I verify data displayed after searching <dataToBeSeached>$")
+  public void i_verify_data_displayed(String dataToBeSeached) {
+
   }
 }

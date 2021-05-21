@@ -1,7 +1,5 @@
 package com.oneframe.cucumber.projectone.seleniumeasypages;
 
-import org.junit.Assert;
-
 import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebElement;
@@ -128,7 +126,7 @@ public class SimpleFormDemoPage {
         WebDriverFactory.clickWebElement(subTabJQuerySelectDropdown);
         break;
       default:
-        Assert.fail("Wrong Sub tab name is provided.");
+        LogPrinter.printLog("Wrong Sub tab name is provided.");
     }
   }
 

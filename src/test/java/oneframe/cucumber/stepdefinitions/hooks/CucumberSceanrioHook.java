@@ -19,7 +19,6 @@ import cucumber.api.java.Before;
  * {@link CucumberSceanrioHook} class will re-initailize the DatabaseBean before
  * and after each scenario to resolve the conflicts if occurred during the
  * scenarios execution.
- *
  */
 public class CucumberSceanrioHook {
 

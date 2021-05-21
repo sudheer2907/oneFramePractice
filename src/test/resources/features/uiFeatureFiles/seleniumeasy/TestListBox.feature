@@ -29,3 +29,14 @@ Scenario Outline: 02 Test JQuery List Box
     Examples:
     |value1   |value2 |value3 |buttonName |
     |Isabella |Sophia |Alice 	|Add        |
+
+Scenario Outline: 03 Test Data List Filter
+    Given I launch and login to the application
+    And I click on tab List Box
+    And I click on sub tab Data List Filter of List Box Page
+    When I serached <searchedName> into Data List filter serach box
+    Then I verify <searchedName> is displayed as a result
+    
+    Examples:
+    |searchedName |
+    |Manager      |

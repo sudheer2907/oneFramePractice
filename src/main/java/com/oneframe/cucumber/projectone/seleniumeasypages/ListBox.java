@@ -3,13 +3,13 @@ package com.oneframe.cucumber.projectone.seleniumeasypages;
 import java.util.LinkedList;
 import java.util.List;
 
-import org.junit.Assert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.Select;
 
+import com.oneframe.cucumber.oneframebase.utils.LogPrinter;
 import com.oneframe.cucumber.oneframebase.utils.WebDriverFactory;
 
 public class ListBox {
@@ -36,6 +36,9 @@ public class ListBox {
   @FindBy(xpath = "//div[contains(@class,'list-right')]/descendant::div/input")
   private WebElement txtboxSearchIntoRightSearchBar;
 
+  @FindBy(xpath = "//input[@type='search']")
+  private WebElement txtboxSearchIntoDataListFilter;
+
   /**
    * Click on subtab.
    *
@@ -57,7 +60,7 @@ public class ListBox {
         break;
 
       default:
-        Assert.fail("Wrong Sub tab name is provided.");
+        LogPrinter.printLog("Wrong Sub tab name is provided.");
     }
   }
 
@@ -154,6 +157,32 @@ public class ListBox {
     int listSize = WebDriverFactory.getDriver().findElements(By.xpath(mainXpathString)).size();
     List<String> list = new LinkedList<>();
     for (int j = 1; j <= listSize; j++) {
+      list.add(WebDriverFactory.getDriver().findElement(By.xpath(mainXpathString + "[" + j + "]"))
+          .getText());
+    }
+    return list;
+  }
+
+  /**
+   * Enter text into data list search box.
+   *
+   * @param input - input to be entered into the data list filter text box.
+   * @author Sudheer.Singh
+   */
+  public void enterTextIntoDataListFilterSearchBox(String input) {
+    WebDriverFactory.sendKeys(txtboxSearchIntoDataListFilter, input);
+  }
+
+  /**
+   * Get list of data displayed.
+   * @param detailsNeeded - type of data needed, like name, title,phone number etc.
+   */
+  public List<String> getDataDisplayed(String detailsNeeded) {
+    String mainXpathString =
+        "//div[@class='searchable-container']/descendant::div[@class='square-box pull-left'][1]/following::p";
+    int size = WebDriverFactory.getDriver().findElements(By.xpath(mainXpathString)).size();
+    List<String> list = new LinkedList<>();
+    for (int j = 1; j <= size; j++) {
       list.add(WebDriverFactory.getDriver().findElement(By.xpath(mainXpathString + "[" + j + "]"))
           .getText());
     }

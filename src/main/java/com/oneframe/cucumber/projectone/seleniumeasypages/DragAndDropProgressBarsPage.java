@@ -4,7 +4,6 @@ import com.oneframe.cucumber.oneframebase.utils.WebDriverFactory;
 
 import java.util.concurrent.TimeUnit;
 
-import org.junit.Assert;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.FindBy;
@@ -29,12 +28,8 @@ public class DragAndDropProgressBarsPage {
    * @author Sudheer.Singh@
    */
   public void clickOnSubTab(String subTabName) {
-    switch (subTabName) {
-      case "Drag & Drop":
-        WebDriverFactory.clickWebElement(subTabDragAndDropSliders);
-        break;
-      default:
-        Assert.fail("Wrong Sub tab name is provided.");
+    if (subTabName.equalsIgnoreCase("Drag & Drop")) {
+      WebDriverFactory.clickWebElement(subTabDragAndDropSliders);
     }
   }
 

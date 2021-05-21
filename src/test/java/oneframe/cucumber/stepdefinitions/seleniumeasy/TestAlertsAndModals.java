@@ -26,21 +26,18 @@ public class TestAlertsAndModals {
     switch (expMessageFor) {
       case "Autocloseable success":
         String messageFetched = alertsAndModals.getMessage(expMessageFor);
-        System.out.println("1:::" + messageFetched);
-        Assert.assertEquals("I'm an autocloseable success message. I will hide in 5 seconds.",
-            messageFetched);
+        Assert.assertEquals(messageFetched,
+            "I'm an autocloseable success message. I will hide in 5 seconds.");
         break;
       case "Normal success":
         String messageFetched2 = alertsAndModals.getMessage(expMessageFor);
-        System.out.println("2:::" + messageFetched2);
-        Assert.assertEquals("I'm a normal success message. To close use the appropriate button.",
-            messageFetched2);
+        Assert.assertEquals(messageFetched2,
+            "I'm a normal success message. To close use the appropriate button.");
         break;
       case "Normal Info":
         String messageFetched3 = alertsAndModals.getMessage(expMessageFor);
-        System.out.println("3:::" + messageFetched3);
-        Assert.assertEquals("I'm a normal info message. To close use the appropriate button.",
-            messageFetched3);
+        Assert.assertEquals(messageFetched3,
+            "I'm a normal info message. To close use the appropriate button.");
         break;
       default:
         Assert.fail("Wrong Sub tab name is provided.");

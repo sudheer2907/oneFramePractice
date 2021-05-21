@@ -1,10 +1,10 @@
 package com.oneframe.cucumber.projectone.seleniumeasypages;
 
-import org.junit.Assert;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
+import com.oneframe.cucumber.oneframebase.utils.LogPrinter;
 import com.oneframe.cucumber.oneframebase.utils.WebDriverFactory;
 
 public class HomePage {
@@ -27,6 +27,9 @@ public class HomePage {
 
   @FindBy(xpath = "//a[@class='dropdown-toggle'][contains(text(),'Alerts & Modals')]")
   private WebElement tabAlertsAndModals;
+
+  @FindBy(xpath = "//a[@class='dropdown-toggle'][contains(text(),'Others')]")
+  private WebElement tabOthers;
 
   /**
    * Click on tab.
@@ -52,8 +55,11 @@ public class HomePage {
       case "List Box":
         WebDriverFactory.clickWebElement(tabListBox);
         break;
+      case "Others":
+        WebDriverFactory.clickWebElement(tabOthers);
+        break;
       default:
-        Assert.fail("Wrong Sub tab name is provided.");
+        LogPrinter.printLog("Wrong Sub tab name is provided.");
     }
   }
 }
