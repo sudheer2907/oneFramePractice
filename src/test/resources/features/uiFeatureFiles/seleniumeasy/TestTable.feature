@@ -19,7 +19,7 @@ Scenario: Test first row data of the table
     Then I verify 2 row data
     Then I verify 3 row data
 
-Scenario: Test table Data Search
+Scenario Outline: Test table Data Search
     Given I launch and login to the application
     And I click on tab Table
     And I click on sub tab Table Data Search of Table page
