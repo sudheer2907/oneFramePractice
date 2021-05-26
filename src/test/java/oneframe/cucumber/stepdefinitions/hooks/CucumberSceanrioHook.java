@@ -39,7 +39,9 @@ public class CucumberSceanrioHook {
       timeDurationCalculator.stop();
       LogPrinter.printLog("Execution Status: " + scenario.getStatus());
       MySqlBeans.setExecutionStatus(scenario.getStatus());
-      WebDriverFactory.closeWindow();
+      if (WebDriverFactory.getDriver() != null) {
+        WebDriverFactory.closeWindow();
+      }
       timeDurationCalculator.calculate();
       MySqlBeans.setExecutionTime(timeDurationCalculator.getTotalSecondsElapsed());
       //insertAutomationExecutionData();
