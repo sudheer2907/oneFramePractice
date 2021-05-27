@@ -1,5 +1,6 @@
 #!/bin/bash
 #Global Variables
+project_location=''
 tags='@TestAPI'
 
 echo "Running Tests"
@@ -9,5 +10,5 @@ echo "TAGS: $tags"
 echo "Fetching latest code"
 git pull
 
-mvn clean test -Dcucumber.options="--tags $tags" -DEnvironment=$env -s settings.xml
+mvn clean test -Dcucumber.options="--tags $tags" -DEnvironment=$env
 exit
